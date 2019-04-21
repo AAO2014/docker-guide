@@ -1,0 +1,44 @@
+avis@avis-comp ~ $ docker run -d --rm parseq/stepik-exec-docker     
+Unable to find image 'parseq/stepik-exec-docker:latest' locally
+latest: Pulling from parseq/stepik-exec-docker
+693502eb7dfb: Pull complete 
+a409896dcde1: Pull complete 
+85c01ce75232: Pull complete 
+13f73220701d: Pull complete 
+d11aa6263068: Pull complete 
+51716549e73d: Pull complete 
+17498233886d: Pull complete 
+a2adc2556175: Pull complete 
+0e424c1723b5: Pull complete 
+295960b64aac: Pull complete 
+41b706194739: Pull complete 
+e27c05f85f9d: Pull complete 
+9c6b69aee949: Pull complete 
+0077befecde1: Pull complete 
+bf272afd74c8: Pull complete 
+Digest: sha256:db066d63099bff37b158a406a4393be51881a9829c7f07e565bd9450cb471d9f
+Status: Downloaded newer image for parseq/stepik-exec-docker:latest
+7513a8508c1cdbf5adba1fd654c361fe64be548023ad1efef4c10c10bc78d0ed
+avis@avis-comp ~ $ docker ps -a
+CONTAINER ID        IMAGE                        COMMAND                  CREATED              STATUS                      PORTS                NAMES
+7513a8508c1c        parseq/stepik-exec-docker    "docker-entrypoint.s…"   About a minute ago   Up About a minute           5432/tcp             thirsty_swanson
+cf8c4a0635e2        parseq/stepik-ports-docker   "httpd-foreground"       About an hour ago    Up About an hour            0.0.0.0:80->80/tcp   port-export
+a5064c2a8ef7        docker_nginx                 "nginx -g 'daemon of…"   8 weeks ago          Exited (137) 8 weeks ago                         docker_nginx_1_4fde8322b0e3
+f5f03892ef38        docker_app                   "./code/entrypoint.sh"   8 weeks ago          Exited (137) 8 weeks ago                         docker_app_1_3d0d23b22f63
+ade679bd8aa2        postgres:11.1-alpine         "docker-entrypoint.s…"   2 months ago         Exited (137) 8 weeks ago                         docker_postgresql_1_c57d73a1a23d
+c6b828a31d58        ubuntu                       "bash"                   2 months ago         Exited (130) 2 months ago                        elastic_keldysh
+438beab43ff1        ubuntu                       "bash"                   3 months ago         Exited (0) 3 months ago                          nifty_newton
+avis@avis-comp ~ $ docker exec thirsty_swanson bash psql -U postgres -c '\dt'
+/usr/lib/postgresql/9.5/bin/psql: /usr/lib/postgresql/9.5/bin/psql: cannot execute binary file
+avis@avis-comp ~ $ docker exec thirsty_swanson psql -U postgres -c '\dt'
+          List of relations
+ Schema |  Name   | Type  |  Owner   
+--------+---------+-------+----------
+ public | answers | table | postgres
+(1 row)
+
+avis@avis-comp ~ $ docker exec thirsty_swanson psql -U postgres -c 'SELECT * FROM answers'
+ id |                                                        answer                                                         
+----+-----------------------------------------------------------------------------------------------------------------------
+  1 | The entity-relationship model adopts the more natural view that the real world consists of entities and relationships
+(1 row)
