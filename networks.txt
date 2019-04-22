@@ -1,0 +1,19 @@
+Задать сеть для контейнера (например, bridge, host, none):
+
+    docker run -it --rm --network=none ubuntu:14.04
+
+И запросим список интерфейсов, например:
+
+    ifconfig
+
+
+
+Создание собственной сети для обеспечения обращения контейнеров по именам вместо ip address :
+    docker network create custom
+
+Параметры сети:
+    docker network inspect custom | more
+
+Связывание двух контейнеров по конкретной сети:
+    docker run -it --rm --name one --network=custom ubuntu:14.04
+    docker run -it --rm --name two --network=custom ubuntu:14.04

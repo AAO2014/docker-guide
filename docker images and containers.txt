@@ -1,0 +1,15 @@
+Список присуществующих в системе образов:
+    docker images
+
+Список существующих контейнеров:
+	docker ps -a
+
+Создание образа из существующего контейнера:
+    docker commit container_name image_name
+
+
+Поменять entrypoint при создании образа:
+    docker commit --change='ENTRYPOINT ["python3"]' container_name image_name
+
+Образ можно создать из Dockerfile (См. dockerfile.txt):
+    docker build -t image_name .
